@@ -1,0 +1,32 @@
+;; -*-mode: outline; coding: shift_jis-dos;-*-
+
+* 概要
+
+cl-win32ole は Common Lisp から Windows の OLE を使うためのライブラリです。
+Ruby の win32ole のようななものです。
+SBCL で動きます。
+Matthew D. Swank さんにより CLISP でも動くようになりました。
+
+* 必要なライブラリ
+
+cffi
+cl-ppcre
+trivial-garbage
+simple-date-time
+
+simple-date-time は github にあります。
+http://github.com/quek/simple-date-time/tree/master
+git clone git://github.com/quek/simple-date-time.git
+
+* 動かし方
+
+example ディレクトリと test ディレクトリの下を見てください。
+
+* 参考資料
+
+Interface 研究室
+http://www.sol.dti.ne.jp/~yoshinor/ni/
+
+CPAN の Win32::OLE
+
+Ruby の Win32OLE

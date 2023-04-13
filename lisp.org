@@ -1,0 +1,112 @@
+
+;;C-x RET p input-coding RET output-coding RET
+
+;;(ql:quickload "trivial-dump-core")
+
+
+WINEPREFIX="$HOME/prefix32" WINEARCH=win32 wine sbcl
+
+HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Session Manager\Environment
+c:\Program Files\Git\bin;C:\windows\system32;C:\windows;C:\windows\system32\wbem;C:\Program Files (x86)\Steel Bank Common Lisp\;C:\Program Files\Git\cmd
+
+
+
+[[file::/z:/home/me/lisp/]]
+
+[[file::/z:/home/me/python]]
+
+
+#+begin_src emacs-lisp :result output
+
+(setq git-executable  "c:/Program Files/Git/cmd/git.exe")
+(setq vc-git-program git-executable)
+
+(getenv "PATH")
+
+#+end_src
+
+#+RESULTS:
+: c:\Program Files\Git\bin;C:\windows\system32;C:\windows;C:\windows\system32\wbem;C:\Program Files (x86)\Steel Bank Common Lisp\;C:\Program Files\Git\cmd;c:/Program Files/Git/bin/;C:\users\me\Local Settings\Application Data\Programs\Python\Python310-32\Scripts\;C:\users\me\Local Settings\Application Data\Programs\Python\Python310-32\;;z:/usr/bin/
+
+
+,#+begin_src emacs-lisp :result output
+
+;;(process-send-string "*eshell*" "(k 10)")
+(process-send-string "*eshell*" "(+ 1 2)")
+(process-send-string "*eshell*"
+"
+(format t \"doc.Name:~a~%\" (ole doc :Name))
+")
+
+#+end_src
+
+#+RESULTS:
+
+#+begin_src lisp
+a
+#+end_src
+
+#+RESULTS:
+: Drawing1.dwg
+
+
+#+begin_src lisp :results output
+
+(defparameter *counter* 0)
+
+    (defun test-update-global-variable ()
+      (bt:make-thread
+       (lambda ()
+         (sleep 1)
+         (incf *counter*)))
+      *counter*)
+
+(print-thread-info)
+
+
+
+#+end_src
+
+#+RESULTS:
+#+begin_example
+Current thread: #<THREAD "slynk-worker" RUNNING {2420B889}>
+
+Current thread name: slynk-worker
+
+All threads:
+ #<THREAD "slynk-worker" RUNNING {2420B889}>
+#<THREAD "sly-channel-1-mrepl-remote-1" RUNNING {234E06E9}>
+#<THREAD "control-thread" RUNNING {243F7571}>
+#<THREAD "slynk-indentation-cache-thread" RUNNING {234E0731}>
+#<THREAD "Slynk Sentinel" RUNNING {234E07C1}>
+#<THREAD "main thread" RUNNING {234E0001}>
+#<THREAD "reader-thread" RUNNING {234E0779}>
+
+#+end_example
+
+
+#+begin_src lisp
+(progn
+  (cl-win32ole-sys::co-initialize (cffi-sys:null-pointer))
+  (let ((acad (create-object "BricscadApp.AcadApplication")))
+    (progn
+      (format t "acad:~a~%" acad)
+      (format t "acad.ActiveDocument:~a~%" (ole acad :ActiveDocument))
+      (format t "acad.ActiveDocument.Name:~a~%" (ole acad :ActiveDocument :Name))
+      (setf doc (ole acad :ActiveDocument))
+      (format t "acad.ActiveDocument.Name:~a~%" (ole acad :ActiveDocument :Name))
+      (format t "acad.ActiveDocument.ZoomAll():~a~%" "1")
+      (invoke (ole doc :Application) :ZoomAll)
+      (format t "doc.Name:~a~%" (ole doc :Name))
+      ))
+  (cl-win32ole-sys::co-uninitialize)
+  )
+
+
+#+end_src
+
+#+RESULTS:
+: ; No value
+
+
+

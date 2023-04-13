@@ -73,9 +73,9 @@
 ;(cl-win32ole-sys::co-initialize (cffi-sys:null-pointer))
 
 (defun times (j)
-(dotimes (i j)
-  (m (+ 1 (random 1000)) (+ 1 (random 10)) 100)
-  )
+  (dotimes (i j)
+    (m (+ 1 (random 1000)) (+ 1 (random 10)) 100)
+    )
   )
 
 ;(times 10)
@@ -115,11 +115,11 @@
     ))
 
 
-(defun make-box-2 (w h)
-  (let ((p0 (point (- w 0) (- h 0) 0))
-	(p1 (point (- w 0) (+ h 0) 0))
-	(p2 (point (+ w 0) (+ h 0) 0))
-	(p3 (point (+ w 0) (- h 0) 0))
+(defun  make-box-2 (w h)
+  (let ((p0 (point (- 0 w) (- 0 h) 0))
+	(p1 (point (- 0 w) (+ 0 h) 0))
+	(p2 (point (+ 0 w) (+ 0 h) 0))
+	(p3 (point (+ 0 w) (- 0 h) 0))
 	)
     (invoke model :Addline p0 p1)
     (invoke model :Addline p1 p2)
@@ -127,17 +127,39 @@
     (invoke model :Addline p3 p0)
     ))
 
+(make-box-2 300 300)
 
 ;(point 1 2 3)
 
-					;(hello)
-(loop for i from 1 to 100
-      do (make-box-2 i i)
-      )
-	 
-(zoom)
 
-;(setf acad2 (create-instance "BricscadApp.AcadApplication"))
+					;(hello)
+(defun make-lot-of-boxes ()
+  (loop for i from 100 to 200
+	do (make-box i i)
+	)
+  
+  (zoom)
+  )
+
+(defun make-lot-of-boxes-2 ()
+  (loop for i from 300 to 800
+	do (make-box-2 i i)
+	)
+  
+  (zoom)
+  )
+
+(make-lot-of-boxes-2)
+
+
+					;(hello)
+(defun make-lot-of-boxes-2 ()
+  (mapcar #'(lambda (i) (make-box-2 i i)) '(100 200 250 260 270 300))
+  )
+
+(make-lot-of-boxes-2)
+
+					;(setf acad2 (create-instance "BricscadApp.AcadApplication"))
 
 ;(setf n1 (ole acad2 :ActiveDocument :Name)
 

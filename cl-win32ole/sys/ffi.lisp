@@ -57,8 +57,8 @@
 
 (defun %unknown-function (unknown symbol)
   (cffi:foreign-slot-value
-   (cffi:foreign-slot-value unknown 'IUnknown 'vtbl)
-   'IUnknownVtbl symbol))
+   (cffi:foreign-slot-value unknown `(:struct ,'IUnknown) 'vtbl)
+   `(:struct ,'IUnknownVtbl) symbol))
 
 (defun unknown-add-ref (unknown)
   (cffi:foreign-funcall-pointer
@@ -76,7 +76,7 @@
 (defun %dispatch-function (dispatch symbol)
   (cffi:foreign-slot-value
    (cffi:foreign-slot-value dispatch `(:struct ,'IDispatch) 'vtbl)
-   'IDispatchVtbl symbol))
+   `(:struct ,'IDispatchVtbl) symbol))
 
 (defun %dispatch-get-ids-of-names (dispatch riid rgszNames cNames lcid rgDispId)
   (cffi:foreign-funcall-pointer

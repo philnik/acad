@@ -6,13 +6,13 @@
           (cffi:foreign-slot-value clsid 'GUID 'Data1)
           (cffi:foreign-slot-value clsid 'GUID 'Data2)
           (cffi:foreign-slot-value clsid 'GUID 'Data3)
-          (cffi:mem-aref (cffi:foreign-slot-value clsid 'GUID 'Data4)
+          (cffi:mem-aref (cffi:foreign-slot-value clsid `(:struct ,'GUID) 'Data4)
                          :unsigned-char 0)
-          (cffi:mem-aref (cffi:foreign-slot-value clsid 'GUID 'Data4)
+          (cffi:mem-aref (cffi:foreign-slot-value clsid `(:struct ,'GUID) 'Data4)
                          :unsigned-char 1))
   (loop for i from 2 to 7
      do (format t "~2,'0x"
-                (cffi:mem-aref (cffi:foreign-slot-value clsid 'GUID 'Data4)
+                (cffi:mem-aref (cffi:foreign-slot-value clsid `(:struct ,'GUID) 'Data4)
                                :unsigned-char i)))
   (format t "}"))
 
@@ -22,7 +22,7 @@
                (parse-integer x :radix 16))
              (s (n x)
                (setf (cffi:mem-aref
-                      (cffi:foreign-slot-value clsid 'GUID 'Data4)
+                      (cffi:foreign-slot-value clsid `(:struct ,'GUID) 'Data4)
                       :unsigned-char n) x)))
       (cl-ppcre:do-register-groups
           ((#'f d1) (#'f d2) (#'f d3)

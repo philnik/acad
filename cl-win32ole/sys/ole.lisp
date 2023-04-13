@@ -60,12 +60,15 @@
     (with-ole-str (s prog-id)
       (succeeded (clsid-from-prog-id s clsid)))
     (cffi:with-foreign-object (pdispatch :pointer)
-      (format t "clsid: ~a" clsid)
+      (format t "create-instance-prog-id: ~a~%" prog-id)
+      (format t "create-instance-clsid: ~a~%" clsid)
+      (print-clsid clsid)
       (cffi:mem-aref pdispatch :pointer)
       (succeeded
        (co-create-instance clsid
                            (cffi-sys:null-pointer)
-                           (+ CLSCTX_INPROC_SERVER CLSCTX_LOCAL_SERVER)
+			   (+ CLSCTX_INPROC_SERVER CLSCTX_LOCAL_SERVER)
+			   ;(+ 0 CLSCTX_LOCAL_SERVER)
                            IID_IDispatch
                            pdispatch))
       (cffi:mem-aref pdispatch :pointer))))

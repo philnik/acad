@@ -1,7 +1,11 @@
 
+
+
 (ql:quickload "trivial-dump-core")
-;(push #'(lambda () (print (sb-kernel::dynamic-usage))) sb-kernel::*after-gc-hooks*)
-;(sb-kernel::gc)
+;(declaim (sb-ext:muffle-conditions cl:warning))
+;(declaim (sb-ext:muffle-conditions cl:style-warning))
+(push #'(lambda () (print (sb-kernel::dynamic-usage))) sb-kernel::*after-gc-hooks*)
+(sb-kernel::gc)
 
 ;(ql:quickload "bt-semaphore")
 
@@ -127,7 +131,7 @@
     (invoke model :Addline p3 p0)
     ))
 
-(make-box-2 300 300)
+;(make-box-2 300 300)
 
 ;(point 1 2 3)
 
@@ -142,14 +146,15 @@
   )
 
 (defun make-lot-of-boxes-2 ()
-  (loop for i from 300 to 800
+  (sb-thread:make-thread
+  (loop for i from 100 to 1000
 	do (make-box-2 i i)
 	)
-  
+  )
   (zoom)
   )
 
-(make-lot-of-boxes-2)
+;(make-lot-of-boxes-2)
 
 
 					;(hello)
@@ -157,7 +162,7 @@
   (mapcar #'(lambda (i) (make-box-2 i i)) '(100 200 250 260 270 300))
   )
 
-(make-lot-of-boxes-2)
+;(make-lot-of-boxes-2)
 
 					;(setf acad2 (create-instance "BricscadApp.AcadApplication"))
 

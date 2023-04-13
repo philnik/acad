@@ -75,7 +75,7 @@
 
 (defun %dispatch-function (dispatch symbol)
   (cffi:foreign-slot-value
-   (cffi:foreign-slot-value dispatch 'IDispatch 'vtbl)
+   (cffi:foreign-slot-value dispatch `(:struct ,'IDispatch) 'vtbl)
    'IDispatchVtbl symbol))
 
 (defun %dispatch-get-ids-of-names (dispatch riid rgszNames cNames lcid rgDispId)

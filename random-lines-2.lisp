@@ -1,11 +1,6 @@
 
 (ql:quickload "trivial-dump-core")
 
-
-(push "c:/users/me/Application Data/lisp/cl-win32ole/" asdf:*central-registry*)
-
-(ql:quickload 'cl-win32ole)
-
 (eval-when (:compile-toplevel :load-toplevel :execute)
   (asdf:oos 'asdf:load-op :cl-win32ole)
   (use-package :cl-win32ole))

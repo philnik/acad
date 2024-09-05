@@ -1,23 +1,14 @@
-
-
-
 (ql:quickload "trivial-dump-core")
 ;(declaim (sb-ext:muffle-conditions cl:warning))
 ;(declaim (sb-ext:muffle-conditions cl:style-warning))
 (push #'(lambda () (print (sb-kernel::dynamic-usage))) sb-kernel::*after-gc-hooks*)
 (sb-kernel::gc)
-
 ;(ql:quickload "bt-semaphore")
 
-;;(push "c:/users/me/Application Data/lisp/cl-win32ole/" asdf:*central-registry*)
-
-;;(ql:quickload 'cl-win32ole)
-
-(use-package 'cl-win32ole)
-
-(use-package 'cl-win32ole-sys)
-
-;(in-package :cl-win32ole)
+(format t "~a" (asdf:asdf-version))
+(defparameter *cl_win32ole_directory* "c:/Users/filip/AppData/Roaming/lisp/acad/cl-win32ole/")
+(push *cl_win32ole_directory* asdf:*central-registry*)
+(asdf:load-system :cl-win32ole)
 
 
 (defun random-point (i j k)
@@ -30,10 +21,11 @@
 (defun hello ()
   (sb-thread:make-thread
    (progn
-  (co-initialize-ex (cffi-sys:null-pointer) COINIT_MULTITHREADED)
-  (setf acad (create-object "BricscadApp.AcadApplication"))
-  (setf (ole acad :Visible) 1)
-  (setf n (ole acad :ActiveDocument :Name))
+     (progn
+  (coinitialize)
+  (setf acad2 (create-object "BricscadApp.AcadApplication"))
+  (setf (ole acad2 :Visible) 1)
+  (setf n (ole acad2 :ActiveDocument :Name)))
   (format t "~a" n)
   (format t "acad:~a~%" acad)
   (format t "acad.ActiveDocument:~a~%" (ole acad :ActiveDocument))

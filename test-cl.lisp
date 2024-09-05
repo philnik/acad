@@ -1,9 +1,3 @@
-
-
-
-
-
-
 (push "c:/users/me/Application Data/lisp/cl-win32ole/" asdf:*central-registry*)
 
 (ql:quickload 'cl-win32ole)
@@ -28,3 +22,6 @@
   (cl-win32ole-sys::co-uninitialize)
   )
 )
+
+
+(zoomall)

@@ -147,6 +147,9 @@
 
            #:p
            #:dformat
+
+	   #:coinit
+	   #:coinitialize
 	   
 	   #:co-initialize-multithreaded
 	   #:co-initialize-apartment-threaded

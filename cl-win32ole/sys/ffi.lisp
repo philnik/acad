@@ -19,18 +19,18 @@
 
 (cffi:defcfun ("CoUninitialize" co-uninitialize) :void)
 
-;; (cffi:defcfun ("CoInitializeEx" co-initialize-ex) HRESULT
-;;   (arg :pointer)
-;;   (dwFlangs DWORD)
-;;   )
+(cffi:defcfun ("CoInitializeEx" co-initialize-ex) HRESULT
+  (arg :pointer)
+  (dwFlangs DWORD)
+  )
 
-;; (defun co-initialize-multithreaded-ex ()
-;;   (co-initialize-ex (cffi-sys:null-pointer) COINIT_MULTITHREADED)
-;; )
+(defun co-initialize-multithreaded-ex ()
+  (co-initialize-ex (cffi-sys:null-pointer) COINIT_MULTITHREADED)
+)
 
-;; (defun co-initialize-apartment-threaded-ex ()
-;;   (co-initialize-ex (cffi-sys:null-pointer) COINIT_APARTMENTTHREADED)
-;; )
+(defun co-initialize-apartment-threaded-ex ()
+  (co-initialize-ex (cffi-sys:null-pointer) COINIT_APARTMENTTHREADED)
+)
 
 (cffi:defcfun ("CoCreateInstance" co-create-instance) HRESULT
   (rclsid :pointer)

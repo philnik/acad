@@ -5,8 +5,10 @@
   (:nicknames #:win32ole #:ole)
   (:use #:common-lisp #:cl-win32ole-sys
         #+sbcl #:sb-mop)
+
   (:export #:with-co-initialize
            #:create-object
+	   #:co-initialize-multithreaded
 	   #:create-object-1
            #:property
            #:invoke

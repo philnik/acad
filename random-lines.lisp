@@ -9,9 +9,9 @@
 
 ;(ql:quickload "bt-semaphore")
 
-(push "c:/users/me/Application Data/lisp/cl-win32ole/" asdf:*central-registry*)
+;;(push "c:/users/me/Application Data/lisp/cl-win32ole/" asdf:*central-registry*)
 
-(ql:quickload 'cl-win32ole)
+;;(ql:quickload 'cl-win32ole)
 
 (use-package 'cl-win32ole)
 
@@ -31,7 +31,7 @@
   (sb-thread:make-thread
    (progn
   (co-initialize-ex (cffi-sys:null-pointer) COINIT_MULTITHREADED)
-  (setf acad (create-object-1 "BricscadApp.AcadApplication"))
+  (setf acad (create-object "BricscadApp.AcadApplication"))
   (setf (ole acad :Visible) 1)
   (setf n (ole acad :ActiveDocument :Name))
   (format t "~a" n)
@@ -74,7 +74,7 @@
  ; (cl-win32ole-sys::co-uninitialize)
   )
 
-;(cl-win32ole-sys::co-initialize (cffi-sys:null-pointer))
+(cl-win32ole-sys::co-initialize (cffi-sys:null-pointer))
 
 (defun times (j)
   (dotimes (i j)
@@ -98,7 +98,7 @@
 (defun get-doc-name (doc)
   (ole doc :Name))
 
-;(get-doc-name doc)
+(get-doc-name doc)
 
 (defun point ( x y z)
   (with-output-to-string (str)
@@ -164,9 +164,15 @@
 
 ;(make-lot-of-boxes-2)
 
-					;(setf acad2 (create-instance "BricscadApp.AcadApplication"))
 
-;(setf n1 (ole acad2 :ActiveDocument :Name)
+
+
+(progn 
+(cl-win32ole-sys::coinitialize)
+(setf acad2 (create-instance "BricscadApp.AcadApplication"))
+)
+acad2
+(setf n1 (ole acad2 :ActiveDocument :Name)
 
 
 

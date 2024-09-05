@@ -105,12 +105,7 @@
   (format t "progid:~a~%" prog-id)
   (make-instance 'dispatch :ptr (create-instance prog-id)
                  :finalizer finalizer))
-
-(defmethod create-object-1 ((prog-id string) &optional finalizer)
-    (format t "progid-1:~a~%" prog-id)
-  (make-instance 'dispatch :ptr (create-instance-1 prog-id)
-                 :finalizer finalizer))
-
+)
 
 (defmacro with-ole-object ((var prog-id) &body body)
   (let ((original-function (gensym)))

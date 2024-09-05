@@ -1,3 +1,13 @@
+
+
+;;; miss link here
+
+(ql:quickload :cl-win32ole)
+(use-package :cl-win32ole)
+
+;(defparameter *load-truename* "c:/")
+
+
 (push "c:/users/me/Application Data/lisp/cl-win32ole/" asdf:*central-registry*)
 (eval-when (:compile-toplevel :load-toplevel :execute)
   (asdf:oos 'asdf:load-op :cl-win32ole)
@@ -7,6 +17,7 @@
                         (pathname-device *load-truename*)
                         (directory-namestring *load-truename*)))
 (defun csv-example ()
+  (co-initialize-multithreaded)
   (let ((cn (create-object "ADODB.Connection"))
         (rs (create-object "ADODB.Recordset"))
         (cs (format nil "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=~a;Extended Properties=\"text;HDR=Yes;FMT=Delimited;\";" *src-dir*)))

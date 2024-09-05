@@ -147,8 +147,11 @@
 
            #:p
            #:dformat
-
+	   
+	   #:co-initialize-multithreaded
+	   #:co-initialize-apartment-threaded
 	   #:COINIT_MULTITHREADED
+	   #:COINIT_APARTMENTTHREADED
 	   #:CO-INITIALIZE-EX
            ))
 

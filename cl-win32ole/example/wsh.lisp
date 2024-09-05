@@ -1,10 +1,15 @@
-(push "c:/users/me/Application Data/lisp/cl-win32ole/" asdf:*central-registry*)
-(eval-when (:compile-toplevel :load-toplevel :execute)
-  (asdf:oos 'asdf:load-op :cl-win32ole)
-  (use-package :cl-win32ole))
+
+;;; push cl-win32ole to asdf:*central-registry or add to quicklisp/localprojects
+;(push ".../cl-win32ole/" asdf:*central-registry*)
+
+
+(ql:quickload :cl-win32ole)
+(use-package :cl-win32ole)
+
 
 (defun wsh-example ()
-  (let ((wsh (create-object "BricscadApp.AcadApplication")))
-    (ole wsh :ActiveDocument)))
+  (co-initialize-multithreaded)
+  (let ((wsh (create-object "WScript.Shell")))
+    (invoke wsh :popup "Hello")))
 
 (wsh-example)

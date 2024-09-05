@@ -77,7 +77,7 @@
 ;(times 10)
 
 (defun zoom ()
-  (invoke (ole doc :Application) :ZoomAll)
+  (invoke (ole acad :Application) :ZoomAll)
 )
   
 (defun nnn (i j k)

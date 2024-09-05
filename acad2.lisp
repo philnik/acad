@@ -33,14 +33,13 @@
 (defun ex ()
   (progn
     (cl-win32ole-sys::coinitialize)
+    (cl-win32ole-sys::co-initialize-multithreaded-ex)
     (defparameter acad (create-object "BricscadApp.AcadApplication"))
     (defparameter doc (ole acad :ActiveDocument))
     (defparameter model (ole doc :ModelSpace))
     (setf (ole acad :Visible) 1)
     (format t "acad.ActiveDocument.Name:~a~%" (ole acad :ActiveDocument :Name))
-
 ;    (invoke model :AddLine "0,0" "100,100")
-    
     (loop for i from 11 to 21
 	  do (ole doc :SendCommand
 		  (format nil "circle~%0,0,0~%~s~%" i)

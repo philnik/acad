@@ -101,9 +101,9 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; create object
-(defmethod create-object ((prog-id string) &optional finalizer)
+(defmethod create-object ((prog-id string) status &optional finalizer)
   (format t "progid:~a~%" prog-id)
-  (make-instance 'dispatch :ptr (create-instance prog-id)
+  (make-instance 'dispatch :ptr (create-instance prog-id status)
                  :finalizer finalizer))
 
 

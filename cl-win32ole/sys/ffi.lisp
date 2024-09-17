@@ -40,6 +40,17 @@
   (ppv :pointer))
 
 
+
+;; HRESULT CoGetClassObject(
+;;   [in]           REFCLSID rclsid,
+;;   [in]           DWORD    dwClsContext,
+;;   [in, optional] LPVOID   pvReserved,
+;;   [in]           REFIID   riid,
+;;   [out]          LPVOID   *ppv
+;; );
+
+
+
 ;; typedef enum tagCOINIT {
 ;;   COINIT_APARTMENTTHREADED = 0x2,
 ;;   COINIT_MULTITHREADED,

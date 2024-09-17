@@ -39,30 +39,20 @@
                   (write-char c))))))))
 
 
-;; (defun create-instance (prog-id)
-;;   (cffi:with-foreign-objects ((clsid 'CLSID))
-;;     (with-ole-str (s prog-id)
-;;       (succeeded (clsid-from-prog-id s clsid)))
-;;     (cffi:with-foreign-object (pdispatch :pointer)
-;;       (format t "clsid: ~a" clsid)
-;;       (succeeded
-;;        (co-create-instance clsid
-;;                            (cffi-sys:null-pointer)
-;;                            (+ CLSCTX_INPROC_SERVER CLSCTX_LOCAL_SERVER)
-;;                            IID_IDispatch
-;;                            pdispatch))
-;;       (cffi:mem-aref pdispatch :pointer))))
-
-
-
-(defun create-instance (prog-id)
+(defun create-instance (prog-id status)
   (cffi:with-foreign-objects ((clsid 'CLSID))
     (with-ole-str (s prog-id)
       (succeeded (clsid-from-prog-id s clsid)))
     (cffi:with-foreign-object (pdispatch :pointer)
       (format t "create-instance-prog-id: ~a~%" prog-id)
+      (format t "------~%")
       (format t "create-instance-clsid: ~a~%" clsid)
       (print-clsid clsid)
+      (if (= status 1)
+	  (setf clsid myclsid)
+	  (setf myclsid clsid)
+	  )
+      (format t "------~%")
       (cffi:mem-aref pdispatch :pointer)
       (succeeded
        (co-create-instance clsid
@@ -70,6 +60,7 @@
 			   (+ CLSCTX_INPROC_SERVER CLSCTX_LOCAL_SERVER)
 			   ;(+ 0 CLSCTX_LOCAL_SERVER)
                            IID_IDispatch
+;			   IID_NULL
                            pdispatch))
       (cffi:mem-aref pdispatch :pointer))))
 

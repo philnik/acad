@@ -3,7 +3,8 @@
 ;; ;; (asdf:oos 'asdf:load-op :cl-win32ole)
 ;; ;; (asdf:oos 'asdf:load-op :cl-win32ole-sys)
 ;; ;; ;;   (use-package :cl-win32ole))
-;; (defparameter *cl_directory* "c:/Users/filip/AppData/Roaming/lisp/acad/cl-win32ole/")
+					;
+					; (defparameter *cl_directory* "c:/Users/filip/AppData/Roaming/lisp/acad/cl-win32ole/")
 ;; (push *cl_directory* asdf:*central-registry*)
 
 ;; ;(ql:quickload 'cl-win32ole)
@@ -30,11 +31,12 @@
 (use-package :cffi)
 (in-package :cl-win32ole)
 
-(defun ex ()
+(defun ex (st)
   (progn
+    (progn 
     (cl-win32ole-sys::coinitialize)
     (cl-win32ole-sys::co-initialize-multithreaded-ex)
-    (defparameter acad (create-object "BricscadApp.AcadApplication"))
+    (defparameter acad (create-object "BricscadApp.AcadApplication" st)))
     (defparameter doc (ole acad :ActiveDocument))
     (defparameter model (ole doc :ModelSpace))
     (setf (ole acad :Visible) 1)
@@ -50,6 +52,7 @@
     (cl-win32ole-sys::co-uninitialize)
     (list acad model doc)))
 
-(setq mydata (ex))
+(setq mydata (ex 0))
+(setq mydata (ex 1))
 
 

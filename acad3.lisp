@@ -26,6 +26,7 @@
 ;;(asdf:load-system 'com.google.base)
 (ql:quickload 'com.google.base)
 (ql:quickload 'swank)
+(ql:quickload 'slynk)
 (defparameter *emacs-port* 4005)
 (defparameter *swank-client-port* 10000)
 
@@ -70,7 +71,7 @@
   )
     
   ;;;; on emacs we run
-;;;;(slime-connect "localhost" 4005)
+;;(slime-connect "localhost" 4005)
 
 
 (setq mydata (ex))

@@ -69,8 +69,7 @@
     (swank:create-server :port *swank-client-port* :dont-close t)
     (wait-for-swank-thread)
   )
-    
-  ;;;; on emacs we run
+      ;;;; on emacs we run
 ;;(slime-connect "localhost" 4005)
 ;;
 ;;on new slime connection: (in-package :cl-win32ole)

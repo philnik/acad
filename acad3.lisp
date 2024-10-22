@@ -59,19 +59,22 @@
     (setf (ole acad :Visible) 1)
     
 
-  (setf swank:*configure-emacs-indentation* nil
+    (setf swank:*configure-emacs-indentation* nil
         swank::*enable-event-ghistory* nil
         swank:*log-events* t)
-  (defparameter *emacs-port* 4005)
-  (defparameter *swank-client-port* 10000)
-
-  (swank:create-server :port *emacs-port* :dont-close t)
-  (swank:create-server :port *swank-client-port* :dont-close t)
-  (wait-for-swank-thread)
+    (defparameter *emacs-port* 4005)
+    (defparameter *swank-client-port* 10000)
+  
+    (swank:create-server :port *emacs-port* :dont-close t)
+    (swank:create-server :port *swank-client-port* :dont-close t)
+    (wait-for-swank-thread)
   )
     
   ;;;; on emacs we run
 ;;(slime-connect "localhost" 4005)
+;;
+;;on new slime connection: (in-package :cl-win32ole)
+;;to get access on local variables
 
 
 (setq mydata (ex))
